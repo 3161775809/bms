@@ -7,7 +7,7 @@ spring:
     username: root
     password: 13812833598
 pagehelper:
-  auto-dialect: mysql
+  auto-dialect: true
   reasonable: true
 
 mybatis-plus:
