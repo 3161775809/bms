@@ -1,9 +1,9 @@
 package com.yfdl.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.yfdl.Dto.InsertUserDto;
-import com.yfdl.entity.BorrowerEntity;
 import com.yfdl.entity.UserEntity;
+import com.yfdl.utils.QueryPageBean;
 import com.yfdl.utils.R;
 
 /**
@@ -15,7 +15,5 @@ import com.yfdl.utils.R;
 public interface UserService extends IService<UserEntity> {
     R login(UserEntity user);
 
-    R insertUser(InsertUserDto user);
-
-    R updateUser(BorrowerEntity user);
+    IPage<UserEntity> findPage(QueryPageBean queryPageBean);
 }

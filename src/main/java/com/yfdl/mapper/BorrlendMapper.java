@@ -1,7 +1,9 @@
 package com.yfdl.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.yfdl.entity.BorrlendEntity;
+import com.yfdl.utils.QueryPageBean;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -12,4 +14,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface BorrlendMapper extends BaseMapper<BorrlendEntity> {
+    public IPage<BorrlendEntity> findPage(QueryPageBean queryPageBean);
 }

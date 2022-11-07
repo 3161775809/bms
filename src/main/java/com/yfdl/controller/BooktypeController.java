@@ -4,9 +4,11 @@ package com.yfdl.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.yfdl.entity.BookEntity;
 import com.yfdl.entity.BooktypeEntity;
 import com.yfdl.service.BooktypeService;
+import com.yfdl.utils.QueryPageBean;
 import com.yfdl.utils.R;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,9 +32,25 @@ public class BooktypeController{
     @Resource
     private BooktypeService booktypeService;
 
-    @GetMapping("selectBooktype")
-    public R selectAll(){
+
+    @GetMapping("selectBooktypeAll")
+    public R selectAll() {
         return R.successResult(booktypeService.list());
+    }
+
+    @GetMapping("selectBooktype")
+    public R selectBook(@RequestParam(required = false) String type){
+        LambdaQueryWrapper<BooktypeEntity> lqw = new LambdaQueryWrapper<>();
+        lqw.eq(Objects.nonNull(type),BooktypeEntity::getType,type);
+        BooktypeEntity one = booktypeService.getOne(lqw);
+        return R.successResult(one);
+    }
+
+
+    @PostMapping("selectBooktypePage")
+    public R selectPage(@RequestBody QueryPageBean queryPageBean){
+        IPage<BooktypeEntity> page = booktypeService.getPage(queryPageBean);
+        return R.successResult(page);
     }
 
     @PostMapping("insertBooktype")
@@ -54,7 +72,5 @@ public class BooktypeController{
         queryWrapper.eq(BooktypeEntity::getType,type);
         return R.successResult(booktypeService.remove(queryWrapper));
     }
-
-
 }
 

@@ -1,20 +1,18 @@
 package com.yfdl.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.yfdl.Dto.InsertUserDto;
-import com.yfdl.entity.BorrowerEntity;
-import com.yfdl.service.BorrowerService;
 import  com.yfdl.service.UserService;
 import com.yfdl.mapper.UserMapper;
 import com.yfdl.entity.UserEntity;
+import com.yfdl.utils.QueryPageBean;
 import com.yfdl.utils.R;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import javax.annotation.Resource;
 
 /**
  * (User)表服务实现类
@@ -24,9 +22,8 @@ import javax.annotation.Resource;
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> implements UserService {
-
-    @Resource
-    private BorrowerService borrowerService;
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     public R login(UserEntity user) {
@@ -47,36 +44,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
             return R.successResult(500,"用户名或密码错误！");
         }else {
             // 3.存在返回用户信息;
-            BorrowerEntity borrowerInfo = borrowerService.query().eq("cardname", username).one();
-
-
-            return R.successResult(borrowerInfo);
+            return R.successResult(userEntity);
         }
-
     }
 
     @Override
-    @Transactional
-    public R insertUser(InsertUserDto user) {
-
-        UserEntity userEntity = new UserEntity();
-        BeanUtil.copyProperties(user,userEntity,false);
-
-        BorrowerEntity borrower = new BorrowerEntity();
-        BeanUtil.copyProperties(user,borrower,false);
-        borrower.setCardname(user.getUser());
-
-        boolean save = save(userEntity);
-        boolean save1 = borrowerService.save(borrower);
-
-        return R.successResult();
-    }
-
-    @Override
-    public R updateUser(BorrowerEntity user) {
-        LambdaQueryWrapper<BorrowerEntity> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(BorrowerEntity::getCardnum,user.getCardnum());
-        boolean b = borrowerService.update(user,queryWrapper);
-        return R.successResult();
+    public IPage<UserEntity> findPage(QueryPageBean queryPageBean) {
+        Integer pageSize = queryPageBean.getPageSize();
+        Integer currentPage = queryPageBean.getCurrentPage();
+        String queryString = queryPageBean.getQueryString();
+        QueryWrapper qw = new QueryWrapper();
+        qw.like("user",queryString);
+        IPage<UserEntity> userEntityPage = new Page<>(currentPage,pageSize);
+        IPage<UserEntity> userEntityIPage = userMapper.selectPage(userEntityPage,qw);
+        return userEntityIPage;
     }
 }

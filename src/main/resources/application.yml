@@ -1,11 +1,14 @@
 server:
-  port: 8080
+  port: 8082
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://47.98.177.86:3306/bbs?useSSL=false&serverTimezone=UTC
     username: root
     password: 13812833598
+pagehelper:
+  auto-dialect: mysql
+  reasonable: true
 
 mybatis-plus:
   configuration:
