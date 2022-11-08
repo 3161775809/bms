@@ -51,7 +51,6 @@ public class BorrlendController{
 
     @PostMapping("updateBorrLend")
     public R updateBook(@RequestBody BorrlendEntity borrlendEntity){
-
         LambdaQueryWrapper<BorrlendEntity> qeryWrapper = new LambdaQueryWrapper<>();
         qeryWrapper.eq(BorrlendEntity::getBooknum,borrlendEntity.getBooknum());
         qeryWrapper.eq(BorrlendEntity::getCardnum,borrlendEntity.getCardnum());

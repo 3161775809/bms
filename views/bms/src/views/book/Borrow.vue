@@ -13,85 +13,29 @@
     <div class="app-container">
       <div class="box">
         <div class="filter-container">
-          <el-input
-            placeholder="借阅信息名称"
-            v-model="pagination.queryString"
-            style="width: 200px"
-            class="filter-item"
-            @keyup.enter.native="handleFilter"
-          ></el-input>
+          <el-input placeholder="借阅信息名称" v-model="pagination.queryString" style="width: 200px" class="filter-item"
+            @keyup.enter.native="handleFilter"></el-input>
           <el-button @click="findPage()" class="dalfBut">查询</el-button>
-          <el-button type="primary" class="butT" @click="handleCreate()"
-            >新建</el-button
-          >
+          <el-button type="primary" class="butT" @click="handleCreate()">新建</el-button>
         </div>
-        <el-table
-          size="small"
-          current-row-key="id"
-          :data="dataList"
-          stripe
-          highlight-current-row
-        >
-          <el-table-column
-            align="center"
-            label="借阅卡号"
-            prop="cardnum"
-          ></el-table-column>
-          <el-table-column
-            prop="booknum"
-            label="图书号"
-            align="center"
-          ></el-table-column>
-          <el-table-column
-            prop="blCardname"
-            label="借阅者姓名"
-            align="center"
-          ></el-table-column>
-          <el-table-column
-            prop="blBookname"
-            label="书名"
-            align="center"
-          ></el-table-column>
-          <el-table-column
-            prop="borrowday"
-            label="借出日期"
-            align="center"
-          ></el-table-column>
-          <el-table-column
-            prop="returnday"
-            label="实际归还日期"
-            align="center"
-          ></el-table-column>
-          <el-table-column
-            prop="finemoney"
-            label="罚款金额"
-            align="center"
-          ></el-table-column>
+        <el-table size="small" current-row-key="id" :data="dataList" stripe highlight-current-row>
+          <el-table-column align="center" label="借阅卡号" prop="cardnum"></el-table-column>
+          <el-table-column prop="booknum" label="图书号" align="center"></el-table-column>
+          <el-table-column prop="blCardname" label="借阅者姓名" align="center"></el-table-column>
+          <el-table-column prop="blBookname" label="书名" align="center"></el-table-column>
+          <el-table-column prop="borrowday" label="借出日期" align="center"></el-table-column>
+          <el-table-column prop="returnday" label="实际归还日期" align="center"></el-table-column>
+          <el-table-column prop="finemoney" label="罚款金额" align="center"></el-table-column>
           <el-table-column label="操作" align="center">
             <template slot-scope="scope">
-              <el-button
-                type="primary"
-                size="mini"
-                @click="handleUpdate(scope.row)"
-                >编辑</el-button
-              >
-              <el-button
-                size="mini"
-                type="danger"
-                @click="handleDelete(scope.row)"
-                >删除</el-button
-              >
+              <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">编辑</el-button>
+              <el-button size="mini" type="danger" @click="handleDelete(scope.row)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
         <div class="pagination-container">
-          <el-pagination
-            @current-change="handleCurrentChange"
-            :current-page="pagination.currentPage"
-            :page-size="pagination.pageSize"
-            layout="total, prev, pager, next, jumper"
-            :total="pagination.total"
-          >
+          <el-pagination @current-change="handleCurrentChange" :current-page="pagination.currentPage"
+            :page-size="pagination.pageSize" layout="total, prev, pager, next, jumper" :total="pagination.total">
           </el-pagination>
         </div>
         <!-- 新增标签弹层 -->
@@ -100,72 +44,31 @@
             <template>
               <el-tabs v-model="activeName" type="card" tab-position="top">
                 <el-tab-pane name="借阅信息" label="借阅信息">
-                  <el-form
-                    ref="elForm"
-                    refString="dataAddForm"
-                    :rules="rules"
-                    :form-config="formConfig"
-                    :value="formData"
-                  >
+                  <el-form ref="elForm" refString="dataAddForm" :rules="rules" :form-config="formConfig"
+                    :value="formData">
                   </el-form>
                 </el-tab-pane>
                 <el-tab-pane name="选择图书" label="选择图书">
                   <div class="filter-container">
-                    <el-input
-                      placeholder="图书名称"
-                      v-model="searchData.queryString"
-                      style="width: 200px"
-                      class="filter-item"
-                    ></el-input>
+                    <el-input placeholder="图书名称" v-model="searchData.queryString" style="width: 200px"
+                      class="filter-item"></el-input>
 
-                    <el-button @click="findPage()" class="dalfBut"
-                      >查询</el-button
-                    >
+                    <el-button @click="findPage()" class="dalfBut">查询</el-button>
                   </div>
-                  <el-table
-                    size="small"
-                    current-row-key="id"
-                    :data="bookList"
-                    stripe
-                    @current-change="currentChange"
-                    highlight-current-row
-                  >
+                  <el-table size="small" current-row-key="id" :data="bookList" stripe @current-change="currentChange"
+                    highlight-current-row>
                     <el-table-column type="index" width="50"> </el-table-column>
-                    <el-table-column
-                      prop="bookname"
-                      label="图书名称"
-                      align="center"
-                    ></el-table-column>
-                    <el-table-column
-                      prop="author"
-                      label="作者"
-                      align="center"
-                    ></el-table-column>
+                    <el-table-column prop="bookname" label="图书名称" align="center"></el-table-column>
+                    <el-table-column prop="author" label="作者" align="center"></el-table-column>
                     <el-table-column label="出版社" prop="press" align="center">
                     </el-table-column>
-                    <el-table-column
-                      prop="pressdate"
-                      label="出版日期"
-                      align="center"
-                    ></el-table-column>
-                    <el-table-column
-                      prop="price"
-                      label="价格"
-                      align="center"
-                    ></el-table-column>
-                    <el-table-column
-                      prop="type"
-                      label="借阅信息"
-                      align="center"
-                    ></el-table-column>
+                    <el-table-column prop="pressdate" label="出版日期" align="center"></el-table-column>
+                    <el-table-column prop="price" label="价格" align="center"></el-table-column>
+                    <el-table-column prop="type" label="借阅信息" align="center"></el-table-column>
                   </el-table>
-                  <el-pagination
-                    @current-change="handleCurrentChange2"
-                    :current-page="searchData.currentPage"
-                    :page-size="searchData.pageSize"
-                    layout="total, prev, pager, next, jumper"
-                    :total="searchData.total"
-                  >
+                  <el-pagination @current-change="handleCurrentChange2" :current-page="searchData.currentPage"
+                    :page-size="searchData.pageSize" layout="total, prev, pager, next, jumper"
+                    :total="searchData.total">
                   </el-pagination>
                 </el-tab-pane>
               </el-tabs>
@@ -178,87 +81,41 @@
         </div>
         <!-- 新增标签弹层 -->
         <div class="edit-form">
-          <el-dialog
-            title="修改借阅信息"
-            :visible.sync="dialogFormVisible4Edit"
-          >
+          <el-dialog title="修改借阅信息" :visible.sync="dialogFormVisible4Edit">
             <template>
               <el-tabs v-model="activeName" type="card" tab-position="top">
                 <el-tab-pane name="借阅信息" label="借阅信息">
-                  <el-form
-                    ref="elForm2"
-                    refString="dataEditForm"
-                    :rules="rules"
-                    :form-config="formConfig"
-                    :value="formData"
-                  >
+                  <el-form ref="elForm2" refString="dataEditForm" :rules="rules" :form-config="formConfig"
+                    :value="formData">
                   </el-form>
                 </el-tab-pane>
                 <el-tab-pane name="选择图书" label="选择图书">
                   <div class="filter-container">
-                    <el-input
-                      placeholder="图书名称"
-                      v-model="searchData.queryString"
-                      style="width: 200px"
-                      class="filter-item"
-                    ></el-input>
+                    <el-input placeholder="图书名称" v-model="searchData.queryString" style="width: 200px"
+                      class="filter-item"></el-input>
 
-                    <el-button @click="findPage()" class="dalfBut"
-                      >查询</el-button
-                    >
+                    <el-button @click="findPage()" class="dalfBut">查询</el-button>
                   </div>
-                  <el-table
-                    size="small"
-                    current-row-key="id"
-                    :data="bookList"
-                    stripe
-                    @current-change="currentChange"
-                    highlight-current-row
-                  >
+                  <el-table size="small" current-row-key="id" :data="bookList" stripe @current-change="currentChange"
+                    highlight-current-row>
                     <el-table-column type="index" width="50"> </el-table-column>
-                    <el-table-column
-                      prop="bookname"
-                      label="图书名称"
-                      align="center"
-                    ></el-table-column>
-                    <el-table-column
-                      prop="author"
-                      label="作者"
-                      align="center"
-                    ></el-table-column>
+                    <el-table-column prop="bookname" label="图书名称" align="center"></el-table-column>
+                    <el-table-column prop="author" label="作者" align="center"></el-table-column>
                     <el-table-column label="出版社" prop="press" align="center">
                     </el-table-column>
-                    <el-table-column
-                      prop="pressdate"
-                      label="出版日期"
-                      align="center"
-                    ></el-table-column>
-                    <el-table-column
-                      prop="price"
-                      label="价格"
-                      align="center"
-                    ></el-table-column>
-                    <el-table-column
-                      prop="type"
-                      label="借阅信息"
-                      align="center"
-                    ></el-table-column>
+                    <el-table-column prop="pressdate" label="出版日期" align="center"></el-table-column>
+                    <el-table-column prop="price" label="价格" align="center"></el-table-column>
+                    <el-table-column prop="type" label="借阅信息" align="center"></el-table-column>
                   </el-table>
-                  <el-pagination
-                    @current-change="handleCurrentChange2"
-                    :current-page="searchData.currentPage"
-                    :page-size="searchData.pageSize"
-                    layout="total, prev, pager, next, jumper"
-                    :total="searchData.total"
-                  >
+                  <el-pagination @current-change="handleCurrentChange2" :current-page="searchData.currentPage"
+                    :page-size="searchData.pageSize" layout="total, prev, pager, next, jumper"
+                    :total="searchData.total">
                   </el-pagination>
                 </el-tab-pane>
               </el-tabs>
             </template>
             <div slot="footer" class="dialog-footer">
-              <el-button @click="dialogFormVisible4Edit = false"
-                >取消</el-button
-              >
+              <el-button @click="dialogFormVisible4Edit = false">取消</el-button>
               <el-button type="primary" @click="handleEdit()">确定</el-button>
             </div>
           </el-dialog>
@@ -347,6 +204,7 @@ export default {
             optList: [],
             placeholder: "请选择借阅者姓名",
             select: (val) => {
+              console.log(val);
               this.formData.blCardname = val.cardname;
               this.formData.cardnum = val.cardnum;
               this.$refs["elForm"]._forceUpdate();
@@ -411,7 +269,7 @@ export default {
           this.formData.returnday =
             new Date(
               new Date(this.formData.borrowday).getTime() +
-                type[0].daynum * 3600 * 24 * 1000
+              type[0].daynum * 3600 * 24 * 1000
             ).toLocaleDateString() + " 00:00:00";
           this.formData.returnday = this.formData.returnday.replace(
             new RegExp("/", "g"),
@@ -432,7 +290,7 @@ export default {
             });
             book.islend = 1;
             //修改图书状态为借出
-            editBook(book).then((res) => {});
+            editBook(book).then((res) => { });
           });
         }
       });
@@ -447,11 +305,8 @@ export default {
       });
       //获取所有图书数据
       findBookAll(this.searchData).then((res) => {
-        this.searchData.total = res.data.total;
-        //获取图书数据成功
-        this.bookList = res.data.data.records.filter(
-          (item) => item.islend != 1
-        );
+        this.searchData.total = res.data.data.total;
+        this.bookList = res.data.data.records;
       });
       selectAll().then((res) => {
         res.data.data.forEach((item) => {
@@ -512,7 +367,7 @@ export default {
           let book = res.data.data;
           book.islend = 0;
           //修改图书状态为未借出
-          editBook(book).then((res) => {});
+          editBook(book).then((res) => { });
         });
       });
     },
@@ -522,11 +377,13 @@ export default {
       this.formData = JSON.parse(JSON.stringify(row));
     },
     currentChange(val) {
-      if (val) {
+      if (val.islend != 1) {
         this.$set(this.formData, "booknum", val.booknum);
         this.$set(this.formData, "blBookname", val.bookname);
         this.formData.type = val.type;
         this.$message.success("已选中" + val.bookname);
+      } else {
+        this.$message.warning("该书已被借阅出去了,请重新选择");
       }
     },
   },
@@ -539,4 +396,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

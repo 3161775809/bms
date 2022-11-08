@@ -1,32 +1,29 @@
 <template>
   <!-- Header content -->
-
-  <el-col :span="6" :offset="0">
-    <div class="userInfo circleBg">
-      <el-row type="flex" :gutter="20">
-        <el-col :span="6" :offset="1">
-          <img src="@/assets/img/user2-160x160.jpg" />
-        </el-col>
-        <el-col style="position: relative" :span="18" :offset="0">
-          <div class="info">
-            <div class="name">{{ username }}</div>
-            <div class="type">{{ type }}</div>
-          </div>
-        </el-col>
-      </el-row>
-      <el-divider></el-divider>
-      <div class="areaInfo">
-        <div class="date">
-          <span>上次登录时间：</span>
-          <span style="margin-left: 20px">2021-10-20</span>
+  <div class="userInfo circleBg">
+    <el-row type="flex" :gutter="20">
+      <el-col :span="6" :offset="1">
+        <img src="@/assets/img/user2-160x160.jpg" />
+      </el-col>
+      <el-col style="position: relative" :span="18" :offset="0">
+        <div class="info">
+          <div class="name">{{ username }}</div>
+          <div class="type">{{ type }}</div>
         </div>
-        <div class="area">
-          <span>上次登录地点： </span>
-          <span style="margin-left: 20px">上海</span>
-        </div>
+      </el-col>
+    </el-row>
+    <el-divider></el-divider>
+    <div class="areaInfo">
+      <div class="date">
+        <span>上次登录时间：</span>
+        <span style="margin-left: 20px">2021-10-20</span>
+      </div>
+      <div class="area">
+        <span>上次登录地点： </span>
+        <span style="margin-left: 20px">上海</span>
       </div>
     </div>
-  </el-col>
+  </div>
 </template>
 
 <script>
@@ -49,7 +46,7 @@ export default {
 <style lang="scss" scoped>
 .userInfo {
   min-width: 400px;
-  min-height: 260px;
+  min-height: 300px;
   height: 30vh;
   padding-top: 20px;
   box-sizing: border-box;

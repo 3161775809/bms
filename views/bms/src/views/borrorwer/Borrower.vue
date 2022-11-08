@@ -10,31 +10,13 @@
     <div class="app-container">
       <div class="box">
         <div class="filter-container">
-          <el-input
-            placeholder="借阅者名称"
-            v-model="pagination.queryString"
-            style="width: 200px"
-            class="filter-item"
-            @keyup.enter.native="handleFilter"
-          ></el-input>
+          <el-input placeholder="借阅者名称" v-model="pagination.queryString" style="width: 200px" class="filter-item"
+            @keyup.enter.native="handleFilter"></el-input>
           <el-button @click="findPage()" class="dalfBut">查询</el-button>
-          <el-button type="primary" class="butT" @click="handleCreate()"
-            >新建</el-button
-          >
+          <el-button type="primary" class="butT" @click="handleCreate()">新建</el-button>
         </div>
-        <el-table
-          size="small"
-          current-row-key="id"
-          :data="dataList"
-          stripe
-          highlight-current-row
-        >
-          <el-table-column
-            v-for="col in labelData"
-            :prop="col.prop"
-            :key="col.prop"
-            :label="col.label"
-          >
+        <el-table size="small" current-row-key="id" :data="dataList" stripe highlight-current-row>
+          <el-table-column v-for="col in labelData" :prop="col.prop" :key="col.prop" :label="col.label">
           </el-table-column>
           <el-table-column prop="sex" label="性别">
             <template slot-scope="scoped">
@@ -49,43 +31,22 @@
 
           <el-table-column label="操作" align="center">
             <template slot-scope="scope">
-              <el-button
-                type="primary"
-                size="mini"
-                @click="handleUpdate(scope.row)"
-                >编辑</el-button
-              >
-              <el-button
-                size="mini"
-                type="danger"
-                :disabled="scope.row.islend == 1"
-                @click="handleDelete(scope.row)"
-                >删除</el-button
-              >
+              <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">编辑</el-button>
+              <el-button size="mini" type="danger" :disabled="scope.row.islend == 1" @click="handleDelete(scope.row)">删除
+              </el-button>
             </template>
           </el-table-column>
         </el-table>
 
         <div class="pagination-container">
-          <el-pagination
-            @current-change="handleCurrentChange"
-            :current-page="pagination.currentPage"
-            :page-size="pagination.pageSize"
-            layout="total, prev, pager, next, jumper"
-            :total="pagination.total"
-          >
+          <el-pagination @current-change="handleCurrentChange" :current-page="pagination.currentPage"
+            :page-size="pagination.pageSize" layout="total, prev, pager, next, jumper" :total="pagination.total">
           </el-pagination>
         </div>
         <!-- 新增标签弹层 -->
         <div class="add-form">
           <el-dialog title="新增借阅者" :visible.sync="dialogFormVisible">
-            <el-form
-              ref="elForm"
-              refString="dataAddForm"
-              :rules="rules"
-              :form-config="formConfig"
-              :value="formData"
-            >
+            <el-form ref="elForm" refString="dataAddForm" :rules="rules" :form-config="formConfig" :value="formData">
             </el-form>
             <div slot="footer" class="dialog-footer">
               <el-button @click="dialogFormVisible = false">取消</el-button>
@@ -96,18 +57,10 @@
         <!-- 编辑标签弹层 -->
         <div class="eidt-form">
           <el-dialog title="编辑借阅者" :visible.sync="dialogFormVisible4Edit">
-            <el-form
-              ref="elForm"
-              refString="dataEditForm"
-              :rules="rules"
-              :form-config="formConfig2"
-              :value="formData"
-            >
+            <el-form ref="elForm" refString="dataEditForm" :rules="rules" :form-config="formConfig2" :value="formData">
             </el-form>
             <div slot="footer" class="dialog-footer">
-              <el-button @click="dialogFormVisible4Edit = false"
-                >取消</el-button
-              >
+              <el-button @click="dialogFormVisible4Edit = false">取消</el-button>
               <el-button type="primary" @click="handleEdit()">确定</el-button>
             </div>
           </el-dialog>
@@ -132,7 +85,7 @@ export default {
       pagination: {
         //分页相关属性
         currentPage: 1,
-        pageSize: 5,
+        pageSize: 15,
         total: 100,
         queryString: "",
       },
@@ -238,10 +191,10 @@ export default {
             type: "select",
             placeholder: "请输入性别",
             optList: [
-              { label: "男", value: "0" },
-              { label: "女", value: "1" },
+              { label: "男", value: "1" },
+              { label: "女", value: "0" },
             ],
-            select: function () {},
+            select: function () { },
           },
           {
             label: "地址",
@@ -306,10 +259,10 @@ export default {
             type: "select",
             placeholder: "请选择性别",
             optList: [
-              { label: "男", value: 0 },
-              { label: "女", value: 1 },
+              { label: "女", value: 0 },
+              { label: "男", value: 1 },
             ],
-            select: function () {},
+            select: function () { },
           },
           {
             label: "是否挂失",
@@ -320,7 +273,7 @@ export default {
               { label: "未挂失", value: 0 },
               { label: "挂失", value: 1 },
             ],
-            select: () => {},
+            select: () => { },
           },
           {
             label: "地址",
@@ -435,4 +388,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

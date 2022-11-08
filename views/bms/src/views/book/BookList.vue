@@ -324,7 +324,7 @@ export default {
       pagination: {
         //分页相关属性
         currentPage: 1,
-        pageSize: 5,
+        pageSize: 15,
         total: 100,
         queryString: "",
       },

@@ -28,7 +28,7 @@ export default {
       pagination: {
         //分页相关属性
         currentPage: 1,
-        pageSize: 5,
+        pageSize: 8,
         total: 100,
         queryString: '',
       },
@@ -66,8 +66,10 @@ export default {
 
 <style lang="scss" scoped>
 .bookinfo {
-  height: 260px;
+  height: auto;
   background: white;
+  position: relative;
+  left: 20px;
 
   .table {
     min-width: 400px;
