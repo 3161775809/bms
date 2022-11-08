@@ -1,21 +1,17 @@
 <template>
   <div class="container">
-    <el-carousel :interval="5000" height="650px" arrow="always">
+    <el-carousel :interval="5000" height="350px" arrow="always">
       <el-carousel-item v-for="(item, index) in imgList" :key="index">
         <el-image :src="require(`../../assets/img/carousel/${index + 1}.jpeg`)" fit="fill"></el-image>
       </el-carousel-item>
     </el-carousel>
     <el-row class="btmBox" :gutter="0">
-      <el-col :span="6" :offset="0">
-        <user-info />
+      <el-col :span="8" offset="">
+        <user-info class="userInfo" />
       </el-col>
-      <el-col :span="18">
-        <book-info />
+      <el-col  :span="15" :offset="1">
+        <book-info class="bookInfo" />
       </el-col>
-    </el-row>
-    <el-row :gutter="0">
-      <el-col class="bookInfo" :span="12" :offset="0"> </el-col>
-      <el-col :span="12" :offset="0"></el-col>
     </el-row>
   </div>
 </template>
@@ -44,12 +40,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
-  .bookInfo {
-    margin-top: 20px;
-    min-width: 400px;
+@media screen and (max-width: 1036px) {
+  .btmBox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
+  .bookInfo {
+    margin-top: 50px;
+    position: relative;
+    right: 20px;
+  }
+  
+}
+.container {
   .el-carousel__item h3 {
     color: #475669;
     font-size: 18px;

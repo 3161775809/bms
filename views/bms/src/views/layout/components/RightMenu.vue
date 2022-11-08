@@ -102,9 +102,11 @@ export default {
   width: 160px;
   min-height: 100%;
   text-align: left;
+  border: 0;
 }
 .el-menu--collapse {
   min-height: 100%;
+  border: 0;
 }
 
 .title {

@@ -57,8 +57,6 @@ export default {
 <style lang="scss" scoped>
 .navbar {
   line-height: 50px;
-  position: relative;
-  right: 1px;
   background: #333333 !important;
   .fold {
     font-size: 34px;

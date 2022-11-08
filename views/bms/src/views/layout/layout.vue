@@ -1,13 +1,13 @@
 <template>
   <div class="hold-transition skin-purple sidebar-mini">
     <el-container>
-      <el-aside style="width: auto">
-          <right-menu :isCollapse="isCollapse"  style="overflow: hidden;"   />
-        </el-aside>
+      <el-aside width="200">
+        <right-menu :isCollapse="isCollapse" style="overflow: hidden" />
+      </el-aside>
       <el-container>
-        <el-header   class="main-header">
-        <page-header @setcollapse="setcollapse"  />
-      </el-header>
+        <el-header class="main-header">
+          <page-header @setcollapse="setcollapse" />
+        </el-header>
         <el-main>
           <router-view />
         </el-main>
@@ -27,24 +27,23 @@ export default {
     PageHeader,
   },
   methods: {
-   setcollapse(collapse) {
-    this.isCollapse = collapse;
-   }
+    setcollapse(collapse) {
+      this.isCollapse = collapse;
+    },
   },
   created() {
-    if(this.$user.getUser() != null) {
-      this.$store.commit("setUser",this.$user.getUser())
+    if (this.$user.getUser() != null) {
+      this.$store.commit("setUser", this.$user.getUser());
     }
   },
   data() {
     return {
-      isCollapse: false
-    }
-  }
+      isCollapse: false,
+    };
+  },
 };
 </script>
 <style scoped>
-
 .el-main {
   height: calc(100vh - 70px);
 }

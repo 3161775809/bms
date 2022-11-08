@@ -68,8 +68,6 @@ export default {
 .bookinfo {
   height: auto;
   background: white;
-  position: relative;
-  left: 20px;
 
   .table {
     min-width: 400px;
